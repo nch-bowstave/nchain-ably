@@ -1,7 +1,7 @@
 # ably-bitcoin-indexer
 
 [![Release](https://img.shields.io/github/release-pre/nch-bowstave/nchain-ably.svg?logo=github&style=flat&v=1)](https://github.com/nch-bowstave/nchain-ably/releases)
-[![Build Status](https://img.shields.io/github/workflow/status/nch-bowstave/nchain-ably/go?logo=github&v=3)](https://github.com/nch-bowstave/nchain-ably/actions)
+[![Build Status](https://github.com/nch-bowstave/nchain-ably/actions/workflows/build.yml/badge.svg)](https://github.com/nch-bowstave/nchain-ably/actions/workflows/build.yml)
 [![Report](https://goreportcard.com/badge/github.com/nch-bowstave/nchain-ably?style=flat&v=1)](https://goreportcard.com/report/github.com/nch-bowstave/nchain-ably)
 [![Go](https://img.shields.io/github/go-mod/go-version/nch-bowstave/nchain-ably?v=1)](https://golang.org/)
 
