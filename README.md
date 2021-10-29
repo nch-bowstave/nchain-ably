@@ -59,6 +59,7 @@ We currently send data to several channels:
 
 The below channels contain only data from outputs from transactions that match these protocols:
 
+- [Twetch](https://twetch.app)
 - bitcom
 - bitcom-b
 - bitcom-d
