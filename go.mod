@@ -20,7 +20,6 @@ require (
 	bitbucket.org/simon_ordish/cryptolib v1.0.44 // indirect
 	github.com/btcsuite/btcd v0.21.0-beta // indirect
 	github.com/btcsuite/btcutil v1.0.2 // indirect
-	github.com/elastic/go-elasticsearch/v7 v7.14.0 // indirect
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/go-zeromq/goczmq/v4 v4.2.2 // indirect
 	github.com/go-zeromq/zmq4 v0.13.0 // indirect

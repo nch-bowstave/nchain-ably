@@ -5,7 +5,6 @@ import (
 )
 
 func SetDefaults() {
-	viper.SetDefault(EnvHeaderType, "node")
 
 	// Node defaults
 	viper.SetDefault(EnvNodeHost, "localhost")

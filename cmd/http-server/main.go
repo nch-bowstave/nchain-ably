@@ -25,12 +25,10 @@ func main() {
 	config.SetDefaults()
 	cfg := config.NewViperConfig(appname).
 		WithServer().
-		WithDb().
 		WithDeployment(appname).
 		WithLog().
 		WithBitcoinNode().
-		WithAbly().
-		WithHeaderClient()
+		WithAbly()
 
 	if err := cfg.Validate(); err != nil {
 		log.Fatal().Msgf("%s", err)
@@ -65,7 +63,7 @@ func main() {
 	defer zmqHandler.Close(zmqSub)
 
 	// wait for shutdown
-	c := make(chan os.Signal)
+	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)
 	<-c
 	log.Info().Msg("shutting down node-listener")
