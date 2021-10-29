@@ -1,27 +1,27 @@
 package main
 
 import (
-	"fmt"
-	"log"
 	"os"
 	"os/signal"
 
+	"github.com/ably/ably-go/ably"
 	_ "github.com/golang-migrate/migrate/v4/database/sqlite3"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
-	"github.com/libsv/nfwd/config"
-	"github.com/libsv/nfwd/config/zmq"
-	"github.com/libsv/nfwd/data/elastic"
-	"github.com/libsv/nfwd/service"
-	zmqTransport "github.com/libsv/nfwd/transports/zmq"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/rs/zerolog"
-	"github.com/elastic/go-elasticsearch/v7"
+	"github.com/rs/zerolog/log"
+
+	"github.com/libsv/nfwd/config"
+	"github.com/libsv/nfwd/config/zmq"
+	txAbly "github.com/libsv/nfwd/data/ably"
+	"github.com/libsv/nfwd/service"
+	zmqTransport "github.com/libsv/nfwd/transports/zmq"
 )
 
 const appname = "node-forwarder"
 
 func main() {
-	log.Printf("starting %s\n", appname)
+	log.Info().Msgf("starting %s\n", appname)
 	config.SetDefaults()
 	cfg := config.NewViperConfig(appname).
 		WithServer().
@@ -29,43 +29,44 @@ func main() {
 		WithDeployment(appname).
 		WithLog().
 		WithBitcoinNode().
-		WithWoc().
+		WithAbly().
 		WithHeaderClient()
 
 	if err := cfg.Validate(); err != nil {
-		log.Fatalf("%s", err)
+		log.Fatal().Msgf("%s", err)
 	}
 	lvl, err := zerolog.ParseLevel(cfg.Logging.Level)
 	if err != nil {
-		log.Println(err)
+		log.Err(err).Msg("failed to parse")
 		zerolog.SetGlobalLevel(zerolog.InfoLevel)
 	} else {
 		zerolog.SetGlobalLevel(lvl)
 	}
-	// TODO elastic setup
-	es, err := elasticsearch.NewClient(elasticsearch.Config{
-		Addresses: []string{
-			"http://elastic:9200",
-		},
-	})
-
-	fmt.Println("connecting to node")
+	log.Info().Msg("connecting to ably")
+	client, err := ably.NewRealtime(
+		ably.WithKey(cfg.Ably.Key),
+		ably.WithClientID(cfg.Ably.Username))
+	if err != nil {
+		log.Fatal().Err(err).Msg("failed to connect to ably")
+	}
+	log.Info().Msg("connected to ably")
+	log.Info().Msg("connecting to node")
 	zmqSub := zmq.Setup(cfg.Node)
-	fmt.Println("node connected")
+	log.Info().Msg("node connected")
 
-	txStore := elastic.NewTransactions(es)
+	txStore := txAbly.NewAbly(*cfg.Ably, client)
 	txService := service.NewTransactionService(txStore)
 	zmqHandler := zmqTransport.NewHeadersHandler(txService)
 	zmqHandler.Register(zmqSub)
-	fmt.Println("starting zmpq listener")
+	log.Info().Msg("starting zmpq listener")
 
 	go zmqHandler.Listen()
-	fmt.Println("started zmpq listener")
+	log.Info().Msg("started zmpq listener")
 	defer zmqHandler.Close(zmqSub)
 
 	// wait for shutdown
 	c := make(chan os.Signal)
 	signal.Notify(c, os.Interrupt)
-	<- c
-	fmt.Println("shutting down node-listener")
+	<-c
+	log.Info().Msg("shutting down node-listener")
 }

@@ -10,9 +10,6 @@ pre-commit: vendor-deps run-all-tests
 run-unit-tests:
 	@go clean -testcache && go test -v ./... -race
 
-run-pipeline-unit-tests:
-	@go clean -testcache && go test -v ./... -race -tags pipeline
-
 run-unit-tests-cover:
 	@go test ./... -race -v -coverprofile cover.out && \
 	go tool cover -html=cover.out -o cover.html && \
@@ -46,18 +43,6 @@ fresh-compose:
 
 stop-compose:
 	@docker-compose down
-
-run-compose-mysql:
-	@docker-compose -f docker-compose.yml -f docker-compose.mysql.yml up
-
-compose-local:
-	@docker-compose -f docker-compose.yml -f docker-compose.local.yml up
-
-compose-local-postgres:
-	@docker-compose -f docker-compose.yml -f docker-compose.local.yml -f docker-compose.postgres.yml up
-
-run-compose-postgres:
-	@docker-compose -f docker-compose.yml -f docker-compose.postgres.yml up
 
 vendor-deps:
 	@go mod tidy && go mod vendor

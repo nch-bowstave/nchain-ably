@@ -48,32 +48,7 @@ func (c *Config) WithDeployment(appName string) *Config {
 
 // WithLog sets up and returns log config.
 func (c *Config) WithLog() *Config {
-	viper.SetDefault(EnvLogLevel, "info")
 	c.Logging = &Logging{Level: viper.GetString(EnvLogLevel)}
-	return c
-}
-
-// WithDb sets up and returns database configuration.
-func (c *Config) WithDb() *Config {
-	viper.SetDefault(EnvDb, "sqlite")
-	viper.SetDefault(EnvDbDsn, "file:data/blockheaders.db?_foreign_keys=true&pooling=true;")
-	viper.SetDefault(EnvDbSchema, "data/sql/migrations")
-	viper.SetDefault(EnvDbMigrate, true)
-	c.Db = &Db{
-		Type:       DbType(viper.GetString(EnvDb)),
-		Dsn:        viper.GetString(EnvDbDsn),
-		SchemaPath: viper.GetString(EnvDbSchema),
-		MigrateDb:  viper.GetBool(EnvDbMigrate),
-	}
-	return c
-}
-
-// WithWoc sets up and returns whatsonchain configuration.
-func (c *Config) WithWoc() *Config {
-	viper.SetDefault(EnvWocURL, "wss://socket.whatsonchain.com/blockheaders/history?from=")
-	c.Woc = &WocConfig{
-		URL: viper.GetString(EnvWocURL),
-	}
 	return c
 }
 
@@ -89,11 +64,13 @@ func (c *Config) WithBitcoinNode() *Config {
 	return c
 }
 
-// WithHeaderClient sets up the header client with the type of
+// WithAbly sets up the header client with the type of
 // syncing we wish to do.
-func (c *Config) WithHeaderClient() *Config {
-	c.Client = &HeaderClient{
-		SyncType: viper.GetString(EnvHeaderType),
+func (c *Config) WithAbly() *Config {
+	c.Ably = &Ably{
+		Key:        viper.GetString(EnvAblyKey),
+		Username:   viper.GetString(EnvAblyUsername),
+		MaxMessage: viper.GetInt64(EnvAblyMaxMessage),
 	}
 	return c
 }

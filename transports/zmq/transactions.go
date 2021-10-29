@@ -37,10 +37,8 @@ func (h *transactionHandler) Listen() {
 		select {
 		case rawTx := <-h.bc:
 			go func() {
-				fmt.Println("handling message")
-				ctx, cancelFn := context.WithTimeout(context.Background(), time.Second*5)
+				ctx, cancelFn := context.WithTimeout(context.Background(), time.Second*120)
 				defer cancelFn()
-				fmt.Println(fmt.Sprintf("%+V", rawTx))
 				if err := h.svc.Create(ctx, nfwd.TransactionCreate{TxHex: rawTx[1]}); err != nil {
 					log.Println(err)
 					return

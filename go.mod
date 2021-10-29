@@ -3,7 +3,7 @@ module github.com/libsv/nfwd
 go 1.17
 
 require (
-	github.com/elastic/go-elasticsearch/v7 v7.14.0
+	github.com/ably/ably-go v1.2.3
 	github.com/golang-migrate/migrate/v4 v4.14.1
 	github.com/libsv/go-bt/v2 v2.0.0-beta.5
 	github.com/mattn/go-sqlite3 v1.14.6
@@ -20,6 +20,7 @@ require (
 	bitbucket.org/simon_ordish/cryptolib v1.0.44 // indirect
 	github.com/btcsuite/btcd v0.21.0-beta // indirect
 	github.com/btcsuite/btcutil v1.0.2 // indirect
+	github.com/elastic/go-elasticsearch/v7 v7.14.0 // indirect
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/go-zeromq/goczmq/v4 v4.2.2 // indirect
 	github.com/go-zeromq/zmq4 v0.13.0 // indirect
@@ -36,8 +37,10 @@ require (
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/subosito/gotenv v1.2.0 // indirect
+	github.com/ugorji/go/codec v1.2.6 // indirect
+	golang.org/x/net v0.0.0-20211020060615-d418f374d309 // indirect
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect
-	golang.org/x/sys v0.0.0-20210615035016-665e8c7367d1 // indirect
+	golang.org/x/sys v0.0.0-20211025201205-69cdffdb9359 // indirect
 	gopkg.in/ini.v1 v1.62.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )

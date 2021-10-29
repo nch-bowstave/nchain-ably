@@ -3,7 +3,7 @@ FROM golang:1.17.1-buster as builder
 WORKDIR /app
 COPY . .
 
-RUN CGO_ENABLED=1 GOOS=linux go build -ldflags="-s -w" ./cmd/http-server
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" ./cmd/http-server
 
 # Create appuser.
 ENV USER=appuser

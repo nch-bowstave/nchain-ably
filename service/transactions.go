@@ -31,7 +31,7 @@ func (h *transactionService) Create(ctx context.Context, req nfwd.TransactionCre
 		}
 	}
 	if err := h.txWtr.Create(ctx, tx); err != nil {
-		return errors.Wrapf(err, "failed to create transaction with hex %s", tx)
+		return errors.Wrapf(err, "failed to create transaction with id %s", tx.TxID())
 	}
 	return nil
 }
