@@ -1,4 +1,4 @@
-# ably-bitcoin-indexer
+# ably-blockchain-indexer
 
 [![Release](https://img.shields.io/github/release-pre/nch-bowstave/nchain-ably.svg?logo=github&style=flat&v=1)](https://github.com/nch-bowstave/nchain-ably/releases)
 [![Build Status](https://github.com/nch-bowstave/nchain-ably/actions/workflows/build.yml/badge.svg)](https://github.com/nch-bowstave/nchain-ably/actions/workflows/build.yml)
@@ -12,11 +12,14 @@ This is built using GoLang and will listen to a node and forward all transaction
 As well as transactions, Bitcoin SV also defines several data protocols that can be sued by applications to 
 standardise encoding etc. We handle the following data protocols:
 
+- twetch
 - bitcom
 - bitcom-b
 - bitcom-d
 - run
 - metanet
+
+> After running it for a few minutes, we were rate limited by Ably :D
 
 ## Quick Start
 
