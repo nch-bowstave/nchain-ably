@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/libsv/go-bt/v2"
-	"github.com/libsv/nfwd"
+	nfwd "github.com/nch-bowstave/nchain-ably"
 	"github.com/pkg/errors"
 	validator "github.com/theflyingcodr/govalidator"
 )

@@ -11,11 +11,11 @@ import (
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 
-	"github.com/libsv/nfwd/config"
-	"github.com/libsv/nfwd/config/zmq"
-	txAbly "github.com/libsv/nfwd/data/ably"
-	"github.com/libsv/nfwd/service"
-	zmqTransport "github.com/libsv/nfwd/transports/zmq"
+	"github.com/nch-bowstave/nchain-ably/config"
+	"github.com/nch-bowstave/nchain-ably/config/zmq"
+	txAbly "github.com/nch-bowstave/nchain-ably/data/ably"
+	"github.com/nch-bowstave/nchain-ably/service"
+	zmqTransport "github.com/nch-bowstave/nchain-ably/transports/zmq"
 )
 
 const appname = "node-forwarder"

@@ -6,7 +6,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/libsv/nfwd"
+	nfwd "github.com/nch-bowstave/nchain-ably"
 	"github.com/ordishs/go-bitcoin"
 	"github.com/pkg/errors"
 )

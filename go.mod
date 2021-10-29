@@ -1,4 +1,4 @@
-module github.com/libsv/nfwd
+module github.com/nch-bowstave/nchain-ably
 
 go 1.17
 

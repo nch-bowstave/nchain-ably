@@ -10,7 +10,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/rs/zerolog/log"
 
-	"github.com/libsv/nfwd/config"
+	"github.com/nch-bowstave/nchain-ably/config"
 )
 
 var protocols = map[string]string{
