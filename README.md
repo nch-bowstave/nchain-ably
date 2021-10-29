@@ -63,7 +63,7 @@ The below channels contain only data from outputs from transactions that match t
 - bitcom
 - bitcom-b
 - bitcom-d
-- run
+- [Run](https://run.network/)
 - metanet
 
 The data format is:
