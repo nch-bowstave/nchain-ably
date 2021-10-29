@@ -1,0 +1,5 @@
+version: '3.7'
+
+services:
+  node-forwarder:
+    image: node-forwarder.local

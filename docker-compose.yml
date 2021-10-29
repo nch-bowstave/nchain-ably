@@ -1,0 +1,51 @@
+version: '3.7'
+
+services:
+  node-forwarder:
+    container_name: node-forwarder
+    image: libsv/nfwd:latest
+    environment:
+      - DB_DSN=file:/data/blockheaders.db?_foreign_keys=true&pooled=true;
+      - DB_SCHEMA_PATH=/migrations
+    restart: unless-stopped
+    volumes:
+      - ~/data/headers-client:/data
+    networks:
+      - regtest-stack
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+    container_name: elastic
+    environment:
+      - node.name=es01
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - elastic:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - regtest-stack
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:7.10.0
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elastic:9200
+    networks:
+      - regtest-stack
+    depends_on:
+      - elastic
+    ports:
+      - 5601:5601
+
+volumes:
+  elastic:
+networks:
+  regtest-stack:
+    name: regtest-stack
+    external: true
